@@ -1,0 +1,34 @@
+body {
+  font-family: 'Arial, sans-serif';
+  background-color: #E49273;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.ingredients-list {
+  list-style: square inside;
+}
+
+ol {
+  list-style: decimal inside;
+}
+
+header > img {
+  width: 100px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#reviews p {
+  font-style: italic;
+  font-weight: bold;
+}
