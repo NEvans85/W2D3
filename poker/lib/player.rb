@@ -15,6 +15,7 @@ class Player
 
   def render_hand
     system 'clear'
+    puts "#{name}'s Hand \n"
     @hand.cards.each_with_index do |card, idx|
       print '|'
       if @cursor.pos == idx
