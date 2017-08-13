@@ -14,7 +14,6 @@ class Player
   end
 
   def render_hand
-    system 'clear'
     puts "#{name}'s Hand \n"
     @hand.cards.each_with_index do |card, idx|
       print '|'
@@ -33,6 +32,7 @@ class Player
   def select_cards
     input = nil
     until input == :stop
+      system 'clear'
       render_hand
       input = @cursor.get_input
       @hand.cards[input].toggle_select if input.is_a?(Integer)

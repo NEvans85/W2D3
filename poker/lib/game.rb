@@ -1,16 +1,19 @@
+require_relative 'deck'
+require_relative 'player'
+
 class Game
 
   def initialize(*player_names)
     @deck = Deck.new
     @players = player_names.map { |player_name| Player.new(player_name) }
-    @curr_player_idx = rand(@players.size)
   end
 
   def play
+    @deck.shuffle!
     deal_to_five
     discard_round
     deal_to_five
-    determine_winners
+    display_results
   end
 
   def deal_to_five
@@ -24,16 +27,25 @@ class Game
     end
   end
 
-  def determine_winners
+  def winners
     winners = [@players.first]
     @players[1..-1].each do |player|
-      if player.hand > winner[0].hand
+      if player.hand > winners[0].hand
         winners = [player]
-      elsif player.hand == winner[0].hand
+      elsif player.hand == winners[0].hand
         winners << player
       end
     end
     winners
   end
 
+  def display_results
+    winners.each do |winner|
+      puts "Congratulations #{winner.name} you win the hand with:"
+      winner.render_hand
+    end
+  end
+
 end
+
+Game.new('player1', 'player2', 'player3').play

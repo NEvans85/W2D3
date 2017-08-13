@@ -26,22 +26,23 @@ class Hand
   end
 
   def >(other)
+    debugger
     if straight_flush?
-      return true unless @other.straight_flush?
+      return true unless other.straight_flush?
     elsif four_of_a_kind?
-      return true unless @other.four_of_a_kind?
+      return true unless other.four_of_a_kind?
     elsif full_house?
-      return true unless @other.full_house?
+      return true unless other.full_house?
     elsif flush?
-      return true unless @other.flush?
+      return true unless other.flush?
     elsif straight?
-      return true unless @other.striaght?
+      return true unless other.straight?
     elsif three_of_a_kind?
-      return true unless @other.striaght?
+      return true unless other.three_of_a_kind?
     elsif two_pair?
-      return true unless @other.straight?
+      return true unless other.two_pair?
     elsif pair?
-      return true unless @other.striaght?
+      return true unless other.pair?
     end
     better_high_card?(other)
   end
@@ -92,7 +93,7 @@ class Hand
 
   def better_high_card?(other)
     @cards.reverse.each_with_index do |card, idx|
-      other_card = other.contents[idx]
+      other_card = other.cards.reverse[idx]
       return card > other_card unless card == other_card
     end
   end
