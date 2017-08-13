@@ -19,9 +19,5 @@ class Deck
   def shuffle!
     @cards.shuffle!
   end
-
-  def draw_card
-    raise 'EMPTY DECK' if @cards.empty?
-    @cards.shift
-  end
+  
 end

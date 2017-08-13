@@ -16,12 +16,16 @@ class Card
     @selected = false
   end
 
-  def reveal
+  def to_s
     "#{VAL_DISPLAY_HASH[value]} #{SUIT_DISPLAY_HASH[suit]}"
   end
 
   def toggle_select
     @selected ? @selected = false : @selected = true
+  end
+
+  def selected?
+    @selected
   end
 
   def ==(other)

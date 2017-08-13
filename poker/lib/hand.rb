@@ -17,6 +17,16 @@ class Hand
     @cards.delete_at(i)
   end
 
+  def discard_selected
+    index_of_selected.each { |idx| discard_at(idx) }
+  end
+
+  def index_of_selected
+    indices = []
+    @cards.each_with_index { |card, index| indices << index if card.seclected? }
+    indices
+  end
+
   def ==(other)
     value_count == other.value_count
   end
