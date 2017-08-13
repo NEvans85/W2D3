@@ -1,10 +1,10 @@
 require_relative 'card'
 
 class Deck
-  attr_accessor :contents, :size
+  attr_accessor :cards, :size
 # TODO: harden instance variables
   def initialize
-    @contents = standard_deck
+    @cards = standard_deck
   end
 
   def standard_deck
@@ -17,11 +17,11 @@ class Deck
   end
 
   def shuffle!
-    @contents.shuffle!
+    @cards.shuffle!
   end
 
   def draw_card
-    raise 'EMPTY DECK' if @contents.empty?
-    @contents.shift
+    raise 'EMPTY DECK' if @cards.empty?
+    @cards.shift
   end
 end

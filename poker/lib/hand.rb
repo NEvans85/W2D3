@@ -2,19 +2,19 @@ require_relative 'card'
 
 class Hand
 
-  attr_reader :contents
+  attr_reader :cards
 
   def initialize
-    @contents = []
+    @cards = []
   end
 
   def give(card)
-    @contents << card
-    @contents.sort!
+    @cards << card
+    @cards.sort!
   end
 
   def discard_at(i)
-    @contents.delete_at(i)
+    @cards.delete_at(i)
   end
 
   def ==(other)
@@ -43,12 +43,12 @@ class Hand
   end
 
   def valid_hand?
-    @contents.length == 5 && @contents.all? { |card| card.is_a?(Card) }
+    @cards.length == 5 && @cards.all? { |card| card.is_a?(Card) }
   end
 
   def value_count
     value_count = Hash.new(0)
-    @contents.each { |card| value_count[card.value] += 1 }
+    @cards.each { |card| value_count[card.value] += 1 }
     value_count
   end
 
@@ -65,7 +65,7 @@ class Hand
   end
 
   def flush?
-    @contents.all? { |card| card.suit == @contents[0].suit }
+    @cards.all? { |card| card.suit == @cards[0].suit }
   end
 
   def straight?
@@ -87,7 +87,7 @@ class Hand
   end
 
   def better_high_card?(other)
-    @contents.reverse.each_with_index do |card, idx|
+    @cards.reverse.each_with_index do |card, idx|
       other_card = other.contents[idx]
       return card > other_card unless card == other_card
     end

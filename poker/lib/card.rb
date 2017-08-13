@@ -1,5 +1,5 @@
 class Card
-  attr_reader :suit, :value
+  attr_reader :suit, :value, :selected
 
   VAL_DISPLAY_HASH = { 14 => 'Ⓐ', 2 => '②', 3 => '③',
                        4 => '④', 5 => '⑤', 6 => '⑥',
@@ -13,10 +13,15 @@ class Card
   def initialize(value, suit)
     @value = value
     @suit = suit
+    @selected = false
   end
 
   def reveal
     "#{VAL_DISPLAY_HASH[value]} #{SUIT_DISPLAY_HASH[suit]}"
+  end
+
+  def toggle_select
+    @selected ? @selected = false : @selected = true
   end
 
   def ==(other)
