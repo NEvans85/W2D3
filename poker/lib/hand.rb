@@ -1,4 +1,4 @@
-requrie_relative 'card'
+require_relative 'card'
 
 class Hand
 
@@ -10,14 +10,36 @@ class Hand
 
   def give(card)
     @contents << card
+    @contents.sort!
   end
 
-  def take(i)
+  def discard_at(i)
     @contents.delete_at(i)
   end
 
-  def > (other)
-    
+  def ==(other)
+    value_count == other.value_count
+  end
+
+  def >(other)
+    if straight_flush?
+      return true unless @other.straight_flush?
+    elsif four_of_a_kind?
+      return true unless @other.four_of_a_kind?
+    elsif full_house?
+      return true unless @other.full_house?
+    elsif flush?
+      return true unless @other.flush?
+    elsif straight?
+      return true unless @other.striaght?
+    elsif three_of_a_kind?
+      return true unless @other.striaght?
+    elsif two_pair?
+      return true unless @other.straight?
+    elsif pair?
+      return true unless @other.striaght?
+    end
+    better_high_card?(other)
   end
 
   def valid_hand?
@@ -26,7 +48,7 @@ class Hand
 
   def value_count
     value_count = Hash.new(0)
-    @content.each { |card| val_count[card.value] += 1 }
+    @contents.each { |card| value_count[card.value] += 1 }
     value_count
   end
 
@@ -49,7 +71,7 @@ class Hand
   def straight?
     values = value_count.keys
     values.length == 5 && (values.max - values.min == 4 ||
-                           values.sort == [1, 10, 11, 12, 13])
+                           values.sort == [2, 3, 4, 5, 14])
   end
 
   def three_of_a_kind?
@@ -64,7 +86,10 @@ class Hand
     value_count.values.include?(2)
   end
 
-  def high_card?
-    !(pair? || straight? || flush?)
+  def better_high_card?(other)
+    @contents.reverse.each_with_index do |card, idx|
+      other_card = other.contents[idx]
+      return card > other_card unless card == other_card
+    end
   end
 end

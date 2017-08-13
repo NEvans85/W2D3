@@ -1,14 +1,14 @@
 class Card
   attr_reader :suit, :value
 
-  VAL_DISPLAY_HASH = { 1 => 'A', 2 => '2', 3 => '3',
-                       4 => '4', 5 => '5', 6 => '6',
-                       7 => '7', 8 => '8', 9 => '9',
-                       10 => '10', 11 => 'J',
-                       12 => 'Q', 13 => 'K' }.freeze
+  VAL_DISPLAY_HASH = { 14 => 'Ⓐ', 2 => '②', 3 => '③',
+                       4 => '④', 5 => '⑤', 6 => '⑥',
+                       7 => '⑦', 8 => '⑧', 9 => '⑨',
+                       10 => '⑩', 11 => 'Ⓙ',
+                       12 => 'Ⓠ', 13 => 'Ⓚ' }.freeze
 
-  SUIT_DISPLAY_HASH = { :heart => "♥", :spade => "♠",
-                        :club => "♣", :diamond => "♦" }.freeze
+  SUIT_DISPLAY_HASH = { heart: '♥', spade: '♤',
+                        club: '♧', diamond: '♦' }.freeze
 
   def initialize(value, suit)
     @value = value
@@ -16,7 +16,27 @@ class Card
   end
 
   def reveal
-    "#{VAL_DISPLAY_HASH[value]}#{SUIT_DISPLAY_HASH[suit]}"
+    "#{VAL_DISPLAY_HASH[value]} #{SUIT_DISPLAY_HASH[suit]}"
+  end
+
+  def ==(other)
+    value == other.value
+  end
+
+  def >(other)
+    value > other.value
+  end
+
+  def <(other)
+    value < other.value
+  end
+
+  def <=>(other)
+    value <=> other.value
+  end
+
+  def inspect
+    reveal
   end
 
 end

@@ -9,9 +9,9 @@ class Deck
 
   def standard_deck
     deck = []
-    suits = [:heart, :diamond, :spade, :club]
+    suits = %i[heart diamond spade club]
     suits.each do |suit|
-      (1..13).each { |i| deck << Card.new(i, suit) }
+      (2..14).each { |i| deck << Card.new(i, suit) }
     end
     deck
   end
