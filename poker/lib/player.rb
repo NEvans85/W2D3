@@ -1,6 +1,7 @@
 require_relative 'cursor'
 require_relative 'hand'
 require_relative 'deck'
+require 'colorize'
 
 class Player
   attr_accessor :hand
@@ -19,7 +20,7 @@ class Player
       if @cursor.pos == idx
         print card.to_s.colorize(:background => :light_blue)
       elsif card.selected?
-        print card.to_s.colorize(:background => :dark_blue)
+        print card.to_s.colorize(:background => :blue)
       else
         print card.to_s
       end
@@ -41,9 +42,13 @@ class Player
     @hand.discard_selected
   end
 
-  def draw_cards(deck, count = 1)
+  def draw_card_from(deck)
     raise 'EMPTY DECK' if deck.cards.empty?
-    count.times { @hand.give(deck.cards.shift) }
+    @hand.give(deck.cards.shift)
+  end
+
+  def draw_to(size, deck)
+    draw_card_from(deck) until @hand.size == size
   end
 
 

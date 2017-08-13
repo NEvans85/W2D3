@@ -45,7 +45,7 @@ class Card
   end
 
   def inspect
-    reveal
+    to_s
   end
 
 end

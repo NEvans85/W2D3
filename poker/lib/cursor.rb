@@ -88,7 +88,7 @@ class Cursor
   end
 
   def update_pos(diff)
-    new_pos = @cursor += diff
+    new_pos = @pos + diff
     @pos = new_pos if (0..4).cover?(new_pos)
   end
 end
