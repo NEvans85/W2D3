@@ -40,6 +40,9 @@ class Game
   end
 
   def display_results
+    system 'clear'
+    puts '------RESULTS------'
+    @players.each(&:render_hand)
     winners.each do |winner|
       puts "Congratulations #{winner.name} you win the hand with:"
       winner.render_hand
